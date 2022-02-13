@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
+
+{% block title %} absemerci {% endblock %}
+
+{% block page_content %}
+
+<div style="margin-bottom: 40px;"></div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <div class="message_flash">{{ message }}</div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
+{% include "_post_detail.html" %}
+
+{% if current_user.can(Permission.WRITE) %} {{ wtf.quick_form(comment_form) }} {% endif %}
+<div style="margin-bottom: 40px;"></div>
+{% include "_comments.html" %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, ".post" ,id=posts[0].id) }}
+</div>
+{% endif %}
+
+
+{% endblock %}

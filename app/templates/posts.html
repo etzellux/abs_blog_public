@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %} absemerci {% endblock %}
+
+{% block page_content %}
+<div style="overflow-wrap: break-word;">
+    {{ wtf.quick_form(post_filter_form) }}
+    <div style="margin-bottom: 40px;"></div>
+    {% include "_posts.html" %}
+</div>
+
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, ".index") }}
+</div>
+
+
+{% endblock %}

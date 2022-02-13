@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} absemerci {% endblock %}
+
+{% block page_content %} 
+
+{{ wtf.quick_form(register_form) }}
+
+{% endblock %}

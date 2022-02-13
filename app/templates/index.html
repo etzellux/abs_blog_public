@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
+
+{% block title %} absemerci {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h3>Hello, 
+
+        {% if current_user.is_authenticated %}
+        {{ current_user.username }}
+        {% else %}
+        Stranger
+        {% endif %}!
+        </h3>
+    </div>
+<div style="overflow-wrap: break-word;">
+{% if current_user.can(Permission.WRITE) %} {{ wtf.quick_form(post_submit_form) }} {% endif %}
+</div>
+<div style="margin-bottom: 40px;"></div>
+
+{% include "_posts.html" %}
+
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, ".index") }}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+<ul class="list-unstyled">
+    {% for post in posts %}
+    <li>
+        <div class="well">
+            <h3>{{ post.header }}</h3>
+            <div style="overflow-wrap: break-word;">
+                <h4>
+                {% if post.body_html %}
+                    {{ post.body_html | safe | truncate(100) }}
+                {% else %}
+                    {{ post.body }}
+                {% endif %}
+                </h4>
+            </div>
+            <div>
+                <a href=" {{ url_for('.post', id=post.id) }}">
+                    <span style="color:rgb(0, 119, 255)">read more</span>
+                </a>
+                {% if current_user.can(Permission.ADMIN)%}
+                <a href=" {{ url_for('.edit', id=post.id) }}">
+                    <span style="color:gray">edit</span>
+                </a>
+                <a href=" {{ url_for('.remove', id=post.id) }}">
+                    <span style="color:rgb(243, 105, 105)">remove</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
+
+{% block title %} absemerci {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h3>Edit Post</h3>
+    </div>
+<div style="margin-bottom: 40px;"></div>
+<div style="overflow-wrap: break-word;">
+{{ wtf.quick_form(edit_form) }}
+</div>
+{% endblock %}

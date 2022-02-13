@@ -1,0 +1,67 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} Flasky {% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/">absemerci</a>
+                </div>
+                <div class="center-block">
+                <ul class="nav navbar-nav justify-content-center">
+                  <li><div style="margin-left:100px"></div></li>
+                  <li><a href="/">home</a></li>
+                  <li><a href="{{ url_for('main.posts') }}">posts</a></li>
+                  <li><a href="{{ url_for('main.aboutme') }}">about me</a></li>
+                  <li><a href="{{ url_for('main.contact') }}">contact</a></li>
+                </ul>
+                </div>
+                {% block search_bar %} {% endblock %}
+                <div class="text-right">
+                  <button class="btn navbar-btn">
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.logout') }}">logout</a></button>
+                    {% else %}
+                    <a href="{{ url_for('auth.login') }}">login</a></button>
+
+                    <button class="btn navbar-btn">
+                      <a href="{{ url_for('auth.register') }}">register</a></button>
+                    {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <div class="well" style="height:100vh">
+        <ul class="list-unstyled">
+          <li>Popular Articles</li>
+          <li><div style="margin-bottom: 20px;"></div></li>
+          <li><a href="/">Link</a></li>
+          <li><a href="/">Link</a></li>
+          <li><a href="/">Link</a></li>
+          <li><a href="/">Link</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-8 text-left"> 
+      {% block page_content %} {% endblock %}
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

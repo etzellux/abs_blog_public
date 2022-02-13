@@ -1,0 +1,23 @@
+<ul class="list-unstyled">
+    {% for comment in comments %}
+    <li>
+        <div class="well">
+            <h3>{{ comment.author.username }}</h3>
+            <h4>
+            {% if comment.body_html %}
+                {{ comment.body_html | safe }}
+            {% else %}
+                {{ comment.body }}
+            {% endif %}
+            </h4>
+            <div>
+                {% if current_user.can(Permission.ADMIN)%}
+                <a href=" {{ url_for('.disable', id=comment.id) }}">
+                    <span style="color:gray">disable</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

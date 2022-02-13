@@ -1,0 +1,18 @@
+<ul class="list-unstyled">
+    {% for post in posts %}
+    <li>
+        <div class="well">
+            <div style="overflow-wrap: break-word;">
+            <h3>{{ post.header }}</h3>
+            <h4>
+            {% if post.body_html %}
+                {{ post.body_html | safe }}
+            {% else %}
+                {{ post.body }}
+            {% endif %}
+            </h4>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
